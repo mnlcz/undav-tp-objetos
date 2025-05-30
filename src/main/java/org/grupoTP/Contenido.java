@@ -1,15 +1,25 @@
 ﻿package org.grupoTP;
-
+import java.util.List;
+import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 // Habría que ver como manejar la construcción de c/subclase. Creo q con constructores individuales
 public abstract class Contenido {
     private String nombre;
     private String tipo;
-    private float puntaje;
-    private String resena;
+    private List<Float> puntajes= new ArrayList<>();
+    private List<String> resenas = new ArrayList<>();
     private String plataforma;
     private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaVisto;
+    
+    protected Contenido(String nombre, String tipo, String plataforma, LocalDateTime fechaCreacion) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.plataforma = plataforma;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaVisto = null;
+    }
 
     public String getNombre() {
         return nombre;
@@ -28,19 +38,26 @@ public abstract class Contenido {
     }
 
     public Float getPuntaje() {
-        return puntaje;
+        if (puntajes.isEmpty()) {
+        return 0.0f; 
     }
-
+        Float puntajeTotal = 0f;
+        for (Float puntaje : puntajes) {
+            puntajeTotal += puntaje;
+        }
+        return puntajeTotal / puntajes.size();
+    }
+    
     public void setPuntaje(Float puntaje) {
-        this.puntaje = puntaje;
+        puntajes.add(puntaje);
     }
 
-    public String getResena() {
-        return resena;
+    public List<String> getResenas() { 
+        return new ArrayList<>(resenas); 
     }
-
+    
     public void setResena(String resena) {
-        this.resena = resena;
+        resenas.add(resena);
     }
 
     public String getPlataforma() {
@@ -57,5 +74,13 @@ public abstract class Contenido {
 
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public LocalDateTime getFechaVisto() {
+        return fechaVisto;
+    }
+
+    public void setFechaVisto(LocalDateTime fechaVisto) {
+        this.fechaVisto = fechaVisto;
     }
 }

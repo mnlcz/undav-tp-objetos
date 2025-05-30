@@ -1,21 +1,43 @@
 ﻿package org.grupoTP;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 public class AdministradorDeContenido {
-    public void agregarContenido(String nombre, String tipo, LocalDateTime fechaCreacion) {
+    private PlataformaCentral plataformaCentral;
+    public AdministradorDeContenido(PlataformaCentral plataformaCentral){
+        this.plataformaCentral = plataformaCentral;
     }
 
-    public boolean fueVisto(String nombre, String plataforma) {
-        throw new UnsupportedOperationException("Falta implementar");
+    public void agregarContenido(Contenido contenido) {
+        //Agrega contenido a PlataformaCentral
+        plataformaCentral.getListaContenidos().add(contenido);
     }
 
-    public void verContenido(String nombre, LocalDateTime fecha, String plataforma) {
+    public void eliminarContenido(Contenido contenido) {
+        //Elimina contenido de PlataformaCentral
+        plataformaCentral.getListaContenidos().remove(contenido);
+
     }
 
-    public void calificarContenido(String nombre, float puntaje, String resena) {
+    public boolean fueVisto(Contenido contenido) {
+        return contenido.getFechaVisto() != null;
     }
 
-    public void ultimosVistos(LocalDateTime desde, LocalDateTime hasta, String plataforma) {
-    } // print ultimos 5 vistos
+    public void calificarContenido(Contenido contenido, float puntaje, String resena) {
+        contenido.setPuntaje(puntaje);
+        contenido.setResena(resena);
+    }
+
+    public List<Contenido> ultimosVistos(LocalDateTime inicio, LocalDateTime fin, String plataforma) {
+        List<Contenido> ultimosVistos = new ArrayList<>();
+        for (Contenido contenido : plataformaCentral.getListaContenidos()) {
+            if (contenido.getFechaVisto() != null && contenido.getPlataforma().equals(plataforma) &&
+                    contenido.getFechaVisto().isAfter(inicio) && contenido.getFechaVisto().isBefore(fin)) {
+                        ultimosVistos.add(contenido);
+            }
+        }
+        return ultimosVistos;
+    }   
 }

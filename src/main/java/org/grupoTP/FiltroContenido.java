@@ -3,6 +3,7 @@
 import java.time.LocalDateTime;
 
 public class FiltroContenido {
+    //Filtra contenido segun parametros enviados
     private String tipo;
     private String plataforma;
     private Float puntajeMin;

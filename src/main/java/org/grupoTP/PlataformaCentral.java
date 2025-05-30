@@ -1,24 +1,33 @@
 ﻿package org.grupoTP;
-
+import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.List;
 
-// Falta el constructor
 public class PlataformaCentral {
-    public List<Contenido> listaContenidos;
+    private List<Contenido> listaContenidos= new ArrayList<>();
 
-    public boolean existeContenido(String nombre, String plataforma) {
-        for (Contenido c : listaContenidos) {
-            if (nombre.equals(c.getNombre()) && (plataforma.equals(c.getPlataforma()))) return true;
+    //Verifica si contenido existe en listaContenidos
+    public boolean existeContenido(Contenido contenido){
+    for (Contenido c : listaContenidos){
+        if (contenido.getNombre().equals(c.getNombre()) && contenido.getPlataforma().equals(c.getPlataforma())){
+            return true;
         }
-        return false;
     }
-
+    return false;
+    }
+    
+    //Verifica si la calificacion es valida
     public boolean calificacionValida(float puntaje) {
-        if (puntaje > 0 && puntaje < 5) return true;
-        return false;
+        return puntaje >= 0.5f && puntaje <= 5.0f;
     }
 
-    public void marcarVisto(String nombre, LocalDateTime fecha, String plataforma) {
+
+    public void marcarVisto(Cliente cliente, Contenido contenido, LocalDateTime fecha) {
+        contenido.setFechaVisto(fecha);
+        cliente.getSeen().add(contenido);
+    }
+
+    public List<Contenido> getListaContenidos(){
+        return listaContenidos;
     }
 }
