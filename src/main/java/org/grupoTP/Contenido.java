@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 public abstract class Contenido {
     private String nombre;
     private String tipo;
-    private List<Float> puntajes= new ArrayList<>();
+    //Cambiar puntaje por calificaciones en diagrama clases
+    //tambien getter y setter
+    private List<Float> calificaciones = new ArrayList<>();
     private List<String> resenas = new ArrayList<>();
     private String plataforma;
     private LocalDateTime fechaCreacion;
@@ -37,19 +39,21 @@ public abstract class Contenido {
         this.tipo = tipo;
     }
 
-    public Float getPuntaje() {
-        if (puntajes.isEmpty()) {
-        return 0.0f; 
-    }
-        Float puntajeTotal = 0f;
-        for (Float puntaje : puntajes) {
-            puntajeTotal += puntaje;
+    public Float getCalificacion() {
+        if (calificaciones.isEmpty()) {
+            return 0f; 
         }
-        return puntajeTotal / puntajes.size();
+        else{
+        Float calificacionTotal = 0f;
+        for (Float calificacion : calificaciones) {
+            calificacionTotal += calificacion;
+        }
+        return calificacionTotal / calificaciones.size();
+        }
     }
     
-    public void setPuntaje(Float puntaje) {
-        puntajes.add(puntaje);
+    public void setCalificacion(Float calificacion) {
+        calificaciones.add(calificacion);
     }
 
     public List<String> getResenas() { 

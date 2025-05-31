@@ -18,7 +18,7 @@ public class PlataformaCentral {
     
     //Verifica si la calificacion es valida
     public boolean calificacionValida(float puntaje) {
-        return puntaje >= 0.5f && puntaje <= 5.0f;
+        return puntaje >= 0.0f && puntaje <= 5.0f;
     }
 
 

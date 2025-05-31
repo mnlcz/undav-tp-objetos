@@ -7,13 +7,11 @@ public class Wishlist {
     private String title;
     private List<Contenido> contenidos = new ArrayList<>() ;
 
-    //Constructor
     public Wishlist(String title) {
         super();
         this.title = title;
     }
 
-    //Getters y Setters
     public String getTitle() {
         return title;
         }

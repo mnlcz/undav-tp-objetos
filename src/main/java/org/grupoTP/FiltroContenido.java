@@ -45,7 +45,7 @@ public class FiltroContenido {
     public boolean cumple(Contenido contenido) {
         if (tipo != null && !tipo.equals(contenido.getTipo())) return false;
         if (plataforma != null && !plataforma.equals(contenido.getPlataforma())) return false;
-        if (puntajeMin != null && contenido.getPuntaje() < puntajeMin) return false;
+        if (puntajeMin != null && contenido.getCalificacion() < puntajeMin) return false;
         if (fechaMin != null && contenido.getFechaCreacion().isBefore(fechaMin)) return false;
         return true;
     }

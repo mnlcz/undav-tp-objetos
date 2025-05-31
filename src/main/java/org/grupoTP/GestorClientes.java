@@ -14,6 +14,8 @@ public class GestorClientes {
     }
     //Elimina la cuenta que llama al metodo de GestorClientes
     public boolean eliminarCuenta(String user){
+        //esto lo va a utilizar un cliente. Si el usuario del cliente
+        //coincide con el usuario enviado en el parametro, se elimina
         return listaClientes.removeIf(cliente -> cliente.getUser().equals(user));
     }
 }

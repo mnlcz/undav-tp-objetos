@@ -25,8 +25,8 @@ public class AdministradorDeContenido {
         return contenido.getFechaVisto() != null;
     }
 
-    public void calificarContenido(Contenido contenido, float puntaje, String resena) {
-        contenido.setPuntaje(puntaje);
+    public void calificarContenido(Contenido contenido, float calificacion, String resena) {
+        contenido.setCalificacion(calificacion);
         contenido.setResena(resena);
     }
 
