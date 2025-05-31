@@ -1,5 +1,6 @@
 ﻿package org.grupoTP;
 
+import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,12 +21,22 @@ public class Wishlist {
         }
     
     public boolean existeWishlist(Cliente cliente, String titulo) {
+        boolean existe = false;
         for (Wishlist w : cliente.getWishlists()){
             if (w.getTitle().equals(titulo)){
-                return true;
+                existe = true;
             }
         }
-        return false;
+        if (!existe){
+            Scanner scanner  = new Scanner(System.in);
+            System.out.println("Deseas agregarlo? S/N");
+            String decision = scanner.nextLine();
+            if(decision == "s" || decision == "S"){
+                cliente.getWishlists().add(new Wishlist(titulo));
+            }
+            scanner.close(); //una vez que no usamos mas el scanner, lo cerramos
+        }
+        return existe;
     }
     
     //Agrega un contenido a la wishlist
