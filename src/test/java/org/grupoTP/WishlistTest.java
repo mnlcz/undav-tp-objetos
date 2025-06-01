@@ -32,20 +32,20 @@ public class WishlistTest {
     void agregarContenidoWishlist_AgregaContenido() {
         wishlist.agregarContenidoWishlist(pelicula1);
         assertTrue(wishlist.eliminarContenidoWishlist(pelicula1),
-                   "Eliminar debería ser exitoso si el contenido fue agregado previamente.");
+                   "Eliminar debería ser exitoso si el contenido fue agregado previamente");
     }
 
     @Test
     void eliminarContenidoWishlist_ContenidoExiste() {
         wishlist.agregarContenidoWishlist(pelicula1);
         assertTrue(wishlist.eliminarContenidoWishlist(pelicula1),
-                   "Debería retornar true si el contenido existía y fue eliminado.");
+                   "Debería retornar true si el contenido existía y fue eliminado");
     }
 
     @Test
     void eliminarContenidoWishlist_ContenidoNoExiste() {
         assertFalse(wishlist.eliminarContenidoWishlist(pelicula1),
-                    "Debería retornar false si el contenido no está en la wishlist.");
+                    "Debería retornar false si el contenido no está en la wishlist");
     }
 
     @Test
@@ -54,7 +54,7 @@ public class WishlistTest {
         cliente.getWishlists().add(clienteWishlist); 
 
         assertTrue(wishlist.existeWishlist(cliente, "Lista del Cliente"),
-                   "Debería retornar true si la wishlist con ese título existe en las listas del cliente.");
+                   "Debería retornar true si la wishlist con ese título existe en las listas del cliente");
     }
 
     @Test
@@ -62,9 +62,9 @@ public class WishlistTest {
         simulacionInput("S\n");
         boolean existe = wishlist.existeWishlist(cliente, "Otra Lista Nueva");
 
-        assertFalse(existe, "Debería retornar false ya que la wishlist no existe inicialmente.");
-        assertEquals(1, cliente.getWishlists().size(), "Se debería haber agregado una wishlist al cliente.");
-        assertEquals("Otra Lista Nueva", cliente.getWishlists().get(0).getTitle(), "La wishlist agregada debería tener el título correcto.");
+        assertFalse(existe, "Debería retornar false ya que la wishlist no existe inicialmente");
+        assertEquals(1, cliente.getWishlists().size(), "Se debería haber agregado una wishlist al cliente");
+        assertEquals("Otra Lista Nueva", cliente.getWishlists().get(0).getTitle(), "La wishlist agregada debería tener el título correcto");
     }
 
 }
