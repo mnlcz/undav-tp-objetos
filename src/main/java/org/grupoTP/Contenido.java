@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 public abstract class Contenido {
     private String nombre;
     private String tipo;
-    //Cambiar puntaje por calificaciones en diagrama clases
-    //tambien getter y setter
     private List<Float> calificaciones = new ArrayList<>();
     private List<String> resenas = new ArrayList<>();
     private String plataforma;

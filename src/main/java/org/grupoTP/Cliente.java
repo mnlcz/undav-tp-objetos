@@ -40,6 +40,9 @@ public class Cliente {
         return password;
     }
 
+    public List<Cliente> getFriends() {
+        return friends;
+    }
     public void setPassword(String password) {
         this.password = password;
     }
