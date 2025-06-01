@@ -18,4 +18,8 @@ public class GestorClientes {
         //coincide con el usuario enviado en el parametro, se elimina
         return listaClientes.removeIf(cliente -> cliente.getUser().equals(user));
     }
+
+    public List<Cliente> getListaClientes(){
+        return listaClientes;
+    }
 }

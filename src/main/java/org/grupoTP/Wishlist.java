@@ -31,7 +31,7 @@ public class Wishlist {
             Scanner scanner  = new Scanner(System.in);
             System.out.println("Deseas agregarlo? S/N");
             String decision = scanner.nextLine();
-            if(decision == "s" || decision == "S"){
+            if("s".equalsIgnoreCase(decision)){
                 cliente.getWishlists().add(new Wishlist(titulo));
             }
             scanner.close(); //una vez que no usamos mas el scanner, lo cerramos
@@ -40,11 +40,20 @@ public class Wishlist {
     }
     
     //Agrega un contenido a la wishlist
-    public void agregarContenidoWishlist(Contenido contenido) {
-        contenidos.add(contenido);
+    public boolean agregarContenidoWishlist(Contenido contenido) {
+        boolean contenidoAgregado = false;
+        if(contenidos.add(contenido)){
+            contenidoAgregado = true;
+        }
+        return contenidoAgregado;
     }
     //Elimina un contenido a la wishlist 
-    public void eliminarContenidoWishlist(Contenido contenido) {
-        contenidos.remove(contenido);
+    public boolean eliminarContenidoWishlist(Contenido contenido) {
+        boolean contenidoEliminado = false;
+        if(contenidos.remove(contenido)){
+            contenidoEliminado = true;
+        }
+        return contenidoEliminado;
+        
     }
 }
