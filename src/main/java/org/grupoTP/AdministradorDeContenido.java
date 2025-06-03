@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class AdministradorDeContenido {
     private PlataformaCentral plataformaCentral;
+    
     public AdministradorDeContenido(PlataformaCentral plataformaCentral){
         this.plataformaCentral = plataformaCentral;
     }
@@ -26,7 +27,20 @@ public class AdministradorDeContenido {
     }
 
     public void calificarContenido(Contenido contenido, float calificacion, String resena) {
-        contenido.setCalificacion(calificacion);
+        boolean visto = false;
+        boolean calificacionValida = false;
+
+        if(fueVisto(contenido) && plataformaCentral.calificacionValida(calificacion)){
+            contenido.setCalificacion(calificacion);
+            visto = true;
+            calificacionValida = true;
+        }
+        if(!visto){
+            System.out.println("No se puede calificar algo no visto");
+        }
+        if(!calificacionValida){
+            System.out.println("Error en calificacion");
+        }
         contenido.setResena(resena);
     }
 

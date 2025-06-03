@@ -8,10 +8,12 @@ public class GestorClientes {
 
     public void registrarCliente(String user, String password){
         int nuevoId = listaClientes.size() + 1;
-        Cliente nuevoCliente = new Cliente(nuevoId, user, password);
+        Cliente nuevoCliente = new Cliente(user, password);
+        nuevoCliente.setId(nuevoId);
         listaClientes.add(nuevoCliente);
         System.out.println("Cliente " + user + " registrado.");
     }
+    
     //Elimina la cuenta que llama al metodo de GestorClientes
     public boolean eliminarCuenta(String user){
         //esto lo va a utilizar un cliente. Si el usuario del cliente

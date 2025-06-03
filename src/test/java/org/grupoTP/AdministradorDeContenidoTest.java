@@ -16,7 +16,7 @@ public class AdministradorDeContenidoTest {
     private Libro libro1;
 
     @BeforeEach
-    void setUp() {
+    void setUp(){
         plataformaCentral = new PlataformaCentral();
         adminDeContenido = new AdministradorDeContenido(plataformaCentral);
         pelicula1 = new Pelicula("La materia: POO", "Pelicula", "Netflix", LocalDateTime.now(), 148);
@@ -24,14 +24,14 @@ public class AdministradorDeContenidoTest {
     }
 
     @Test
-    void testAgregarContenido() {
+    void testAgregarContenido(){
         adminDeContenido.agregarContenido(pelicula1);
         assertTrue(plataformaCentral.getListaContenidos().contains(pelicula1), "El contenido debería haberse agregado a la plataforma");
         assertEquals(1, plataformaCentral.getListaContenidos().size(), "La lista de contenidos debería tener un elemento");
     }
 
     @Test
-    void testEliminarContenido() {
+    void testEliminarContenido(){
         adminDeContenido.agregarContenido(pelicula1);
         adminDeContenido.agregarContenido(libro1);
         adminDeContenido.eliminarContenido(pelicula1);
@@ -40,21 +40,21 @@ public class AdministradorDeContenidoTest {
         assertEquals(1, plataformaCentral.getListaContenidos().size(), "La lista de contenidos debería tener un elemento después de eliminar uno");
     }
 
-    void testCalificarContenido() {
+    void testCalificarContenido(){
         adminDeContenido.calificarContenido(libro1, 4.0f, "Excelente libro. No le doy 5 estrellas porque es muy largo");
         assertEquals(4.5f, libro1.getCalificacion(), "La calificacion fue colocada correctamente");
         assertTrue(libro1.getResenas().contains("Excelente libro. No le doy 5 estrellas porque es muy largo"), "La reseña fue agregada correctamente");
     }
 
     @Test
-    void testFueVisto() {
+    void testFueVisto(){
         assertFalse(adminDeContenido.fueVisto(pelicula1), "Contenido nuevo no debería estar marcado como visto");
         pelicula1.setFechaVisto(LocalDateTime.now());
         assertTrue(adminDeContenido.fueVisto(pelicula1), "Contenido con fechaVisto debería estar marcado como visto");
     }
 
     @Test
-    void testUltimosVistos() {
+    void testUltimosVistos(){
         //Puede que sea confuso. La pelicula se crea ayer 
         Contenido peliculaVistaHoy = new Pelicula("Tenet", "Pelicula", "HBO", LocalDateTime.now().minusDays(1), 150);
         //Aca es cuando yo la veo

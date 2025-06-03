@@ -19,7 +19,7 @@ public class WishlistTest {
     @BeforeEach
     void setUp() {
         wishlist = new Wishlist("Favoritos");
-        cliente = new Cliente(1, "POO", "Fernando");
+        cliente = new Cliente("POO", "Fernando");
         pelicula1 = new Pelicula("La materia: POO", "Pelicula", "Netflix", LocalDateTime.now(), 148);
     }
 
@@ -58,13 +58,12 @@ public class WishlistTest {
     }
 
     @Test
-    void existeWishlist_NoExisteEnCliente() {
+    void existeWishlist_NoExisteEnClienteYloAgrega() {
         simulacionInput("S\n");
         boolean existe = wishlist.existeWishlist(cliente, "Otra Lista Nueva");
-
-        assertFalse(existe, "Debería retornar false ya que la wishlist no existe inicialmente");
+        
+        assertTrue(existe, "Debería retornar true ya que la wishlist no existe y lo agrega");
         assertEquals(1, cliente.getWishlists().size(), "Se debería haber agregado una wishlist al cliente");
         assertEquals("Otra Lista Nueva", cliente.getWishlists().get(0).getTitle(), "La wishlist agregada debería tener el título correcto");
     }
-
 }

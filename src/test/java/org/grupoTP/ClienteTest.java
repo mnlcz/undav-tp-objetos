@@ -7,7 +7,7 @@ public class ClienteTest {
 
     @Test
     void testCrearClienteConListasVacias() {
-        Cliente cliente = new Cliente(1, "testUser", "password");
+        Cliente cliente = new Cliente("testUser", "password");
         assertNotNull(cliente.getFriends(), "La lista de amigos no debería ser nula");
         assertTrue(cliente.getFriends().isEmpty(), "La lista de amigos debería estar vacía al crear el cliente");
         assertNotNull(cliente.getSeen(), "La lista de vistos no debería ser nula");

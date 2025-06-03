@@ -1,9 +1,9 @@
 ﻿package org.grupoTP;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-// Habría que ver como manejar la construcción de c/subclase. Creo q con constructores individuales
 public abstract class Contenido {
     private String nombre;
     private String tipo;
@@ -55,7 +55,7 @@ public abstract class Contenido {
     }
 
     public List<String> getResenas() { 
-        return new ArrayList<>(resenas); 
+        return resenas; 
     }
     
     public void setResena(String resena) {

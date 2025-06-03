@@ -33,6 +33,7 @@ public class Wishlist {
             String decision = scanner.nextLine();
             if("s".equalsIgnoreCase(decision)){
                 cliente.getWishlists().add(new Wishlist(titulo));
+                existe = true;
             }
             scanner.close(); //una vez que no usamos mas el scanner, lo cerramos
         }
@@ -44,9 +45,14 @@ public class Wishlist {
         boolean contenidoAgregado = false;
         if(contenidos.add(contenido)){
             contenidoAgregado = true;
+            System.out.println("Contenido agregado con exito");
+        }
+        else{
+            System.out.println("No se pudo agregar el contenido");
         }
         return contenidoAgregado;
     }
+
     //Elimina un contenido a la wishlist 
     public boolean eliminarContenidoWishlist(Contenido contenido) {
         boolean contenidoEliminado = false;
