@@ -47,9 +47,9 @@ public class AdministradorDeContenido {
     public List<Contenido> ultimosVistos(LocalDateTime inicio, LocalDateTime fin, String plataforma) {
         List<Contenido> ultimosVistos = new ArrayList<>();
         for (Contenido contenido : plataformaCentral.getListaContenidos()) {
-            if (contenido.getFechaVisto() != null && contenido.getPlataforma().equals(plataforma) &&
-                    contenido.getFechaVisto().isAfter(inicio) && contenido.getFechaVisto().isBefore(fin)) {
-                        ultimosVistos.add(contenido);
+            if (contenido.getFechaVisto() != null && contenido.getPlataforma().equals(plataforma) && 
+            contenido.getFechaVisto().isAfter(inicio) && contenido.getFechaVisto().isBefore(fin)) {
+                ultimosVistos.add(contenido);
             }
         }
         return ultimosVistos;

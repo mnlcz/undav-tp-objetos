@@ -62,14 +62,14 @@ public class Cliente {
     }
 
     public boolean eliminarAmigo(Cliente amigo) {
-        boolean esAmigo = false;
+        boolean amigoEliminado = false;
         if (friends.contains(amigo)) {
-            esAmigo = true;
+            amigoEliminado = true;
             friends.remove(amigo);
-        } 
+        }
         else{
             System.out.println("No se pudo eliminar. No compartes amistad con ese usuario.");
         }
-        return esAmigo;
+        return amigoEliminado;
     }
 }
