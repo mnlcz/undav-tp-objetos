@@ -2,6 +2,7 @@ package org.grupoTP;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GestorClientes {
     private List<Cliente> listaClientes = new ArrayList<>();
@@ -23,5 +24,26 @@ public class GestorClientes {
 
     public List<Cliente> getListaClientes() {
         return listaClientes;
+    }
+
+    public Optional<Cliente> existe(String nombre) {
+        return getListaClientes().stream().filter(cliente -> cliente.getUser().equals(nombre)).findFirst();
+    }
+
+    public Cliente getCliente(String nombre) {
+        var existe = existe(nombre);
+        return existe.orElse(null);
+    }
+
+    public Optional<Wishlist> getWishlist(Cliente usuario, String titulo) {
+        return usuario.getWishlists()
+                .stream()
+                .filter(w -> w.getTitle().equals(titulo))
+                .findFirst();
+    }
+
+    // La validación se hace en App
+    public void agregarWishlist(Cliente usuario, String titulo) {
+        usuario.addWishlist(new Wishlist(titulo));
     }
 }

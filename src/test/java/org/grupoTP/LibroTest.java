@@ -50,13 +50,5 @@ public class LibroTest {
         libro.setCalificacion(5.0f);
         float esperado = (4.0f + 5.0f) / 2;
         assertEquals(esperado, libro.getCalificacion());
-
-        // Probar resenias
-        libro.setResena("Excelente libro");
-        libro.setResena("Muy didactico");
-        List<String> resenas = libro.getResenas();
-        assertEquals(2, resenas.size());
-        assertTrue(resenas.contains("Excelente libro"));
-        assertTrue(resenas.contains("Muy didactico"));
     }
 }

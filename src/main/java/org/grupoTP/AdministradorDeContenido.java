@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class AdministradorDeContenido {
-    private final PlataformaCentral plataformaCentral;
+    public final PlataformaCentral plataformaCentral;
 
     public AdministradorDeContenido(PlataformaCentral plataformaCentral) {
         this.plataformaCentral = plataformaCentral;
@@ -23,7 +23,7 @@ public class AdministradorDeContenido {
         return contenido.getFechaVisto() != null;
     }
 
-    public void calificarContenido(Contenido contenido, float calificacion, String resena) {
+    public void calificarContenido(Cliente usuario, Contenido contenido, float calificacion, String resena) {
         boolean visto = false;
         boolean calificacionValida = false;
 
@@ -38,7 +38,7 @@ public class AdministradorDeContenido {
         if (!calificacionValida) {
             System.out.println("Error en calificacion");
         }
-        contenido.setResena(resena);
+        contenido.setResena(usuario, resena);
     }
 
     public List<Contenido> ultimosVistos(LocalDateTime inicio, LocalDateTime fin, String plataforma) {

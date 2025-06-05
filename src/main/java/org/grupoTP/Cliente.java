@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-// Habría que ver si se inicializa las listas en el constructor o inline (como estaba antes)
 public class Cliente {
     private int id;
     private String user;
@@ -57,13 +56,17 @@ public class Cliente {
         return this.wishlists;
     }
 
+    public void addWishlist(Wishlist wl) {
+        this.wishlists.add(wl);
+    }
+
     public List<Contenido> getSeen() {
         return this.seen;
     }
 
-    //Agrega el amigo por parametro a la lista de amigos del cliente
     public void agregarAmigo(Cliente amigo) {
         friends.add(amigo);
+        amigo.friends.add(this); // TODO: test
     }
 
     public boolean eliminarAmigo(Cliente amigo) {
@@ -71,6 +74,7 @@ public class Cliente {
         if (friends.contains(amigo)) {
             amigoEliminado = true;
             friends.remove(amigo);
+            amigo.friends.remove(this); // TODO: test
         } else {
             System.out.println("No se pudo eliminar. No compartes amistad con ese usuario.");
         }
@@ -106,5 +110,10 @@ public class Cliente {
     public boolean verificarPassword(String password) {
         var candidate = hashPassword(password, this.salt);
         return candidate.equals(this.password);
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + this.user + "\t\tAmigos: " + this.friends.size();
     }
 }

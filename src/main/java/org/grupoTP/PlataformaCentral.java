@@ -3,6 +3,7 @@ package org.grupoTP;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public class PlataformaCentral {
     private List<Contenido> listaContenidos = new ArrayList<>();
@@ -28,5 +29,12 @@ public class PlataformaCentral {
 
     public List<Contenido> getListaContenidos() {
         return listaContenidos;
+    }
+
+    public Optional<Contenido> getContenido(String nombre) {
+        return getListaContenidos()
+                .stream()
+                .filter(contenido -> contenido.getNombre().equals(nombre))
+                .findFirst();
     }
 }

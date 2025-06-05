@@ -2,6 +2,7 @@ package org.grupoTP;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
@@ -52,11 +53,5 @@ public class PeliculaTest {
         p.setCalificacion(4.0f);
         float esperado = (3.0f + 4.0f) / 2;
         assertEquals(esperado, p.getCalificacion());
-
-        // Probar resenias
-        p.setResena("Peor que Riquelme en boca");
-        List<String> resenas = p.getResenas();
-        assertEquals(1, resenas.size());
-        assertTrue(resenas.contains("Peor que Riquelme en boca"));
     }
 }

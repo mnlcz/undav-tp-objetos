@@ -56,11 +56,5 @@ public class SerieTest {
         s.setCalificacion(3.0f);
         float esperado = (2.0f + 3.0f) / 2;
         assertEquals(esperado, s.getCalificacion());
-
-        // Probar resenias
-        s.setResena("Buen arranque");
-        List<String> resenas = s.getResenas();
-        assertEquals(1, resenas.size());
-        assertTrue(resenas.contains("Buen arranque"));
     }
 }

@@ -1,14 +1,16 @@
 package org.grupoTP;
 
+import java.util.Hashtable;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 public abstract class Contenido {
     private String nombre;
     private String tipo;
     private List<Float> calificaciones = new ArrayList<>();
-    private List<String> resenas = new ArrayList<>();
+    private Map<Cliente, String> resenas = new Hashtable<>();
     private String plataforma;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaVisto;
@@ -53,12 +55,12 @@ public abstract class Contenido {
         calificaciones.add(calificacion);
     }
 
-    public List<String> getResenas() {
+    public Map<Cliente, String> getResenas() {
         return resenas;
     }
 
-    public void setResena(String resena) {
-        resenas.add(resena);
+    public void setResena(Cliente user, String resena) {
+        resenas.put(user, resena);
     }
 
     public String getPlataforma() {
@@ -83,5 +85,10 @@ public abstract class Contenido {
 
     public void setFechaVisto(LocalDateTime fechaVisto) {
         this.fechaVisto = fechaVisto;
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + this.nombre + "\t\tTipo: " + this.tipo + "\t\tPlataforma: " + this.plataforma;
     }
 }
