@@ -1,4 +1,4 @@
-﻿package org.grupoTP;
+package org.grupoTP;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public abstract class Contenido {
     private String plataforma;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaVisto;
-    
+
     protected Contenido(String nombre, String tipo, String plataforma, LocalDateTime fechaCreacion) {
         this.nombre = nombre;
         this.tipo = tipo;
@@ -39,25 +39,24 @@ public abstract class Contenido {
 
     public Float getCalificacion() {
         if (calificaciones.isEmpty()) {
-            return 0f; 
-        }
-        else{
-        Float calificacionTotal = 0f;
-        for (Float calificacion : calificaciones) {
-            calificacionTotal += calificacion;
-        }
-        return calificacionTotal / calificaciones.size();
+            return 0f;
+        } else {
+            Float calificacionTotal = 0f;
+            for (Float calificacion : calificaciones) {
+                calificacionTotal += calificacion;
+            }
+            return calificacionTotal / calificaciones.size();
         }
     }
-    
+
     public void setCalificacion(Float calificacion) {
         calificaciones.add(calificacion);
     }
 
-    public List<String> getResenas() { 
-        return resenas; 
+    public List<String> getResenas() {
+        return resenas;
     }
-    
+
     public void setResena(String resena) {
         resenas.add(resena);
     }
