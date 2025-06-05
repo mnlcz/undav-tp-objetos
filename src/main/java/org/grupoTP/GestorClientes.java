@@ -3,7 +3,6 @@ package org.grupoTP;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: encriptar password con algun algoritmo
 public class GestorClientes {
     private List<Cliente> listaClientes = new ArrayList<>();
 

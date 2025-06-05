@@ -1,7 +1,12 @@
-﻿package org.grupoTP;
+package org.grupoTP;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
+
 // Habría que ver si se inicializa las listas en el constructor o inline (como estaba antes)
 public class Cliente {
     private int id;
@@ -10,11 +15,11 @@ public class Cliente {
     private List<Cliente> friends;
     private List<Contenido> seen;
     private List<Wishlist> wishlists;
+    private String salt;
 
-    public Cliente(String user, String password){
-        super();
+    public Cliente(String user, String password) {
         this.user = user;
-        this.password = password;
+        handleSecurePassword(password);
         this.friends = new ArrayList<>();
         this.seen = new ArrayList<>();
         this.wishlists = new ArrayList<>();
@@ -41,13 +46,13 @@ public class Cliente {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        handleSecurePassword(password);
     }
 
     public List<Cliente> getFriends() {
         return friends;
     }
-    
+
     public List<Wishlist> getWishlists() {
         return this.wishlists;
     }
@@ -66,10 +71,40 @@ public class Cliente {
         if (friends.contains(amigo)) {
             amigoEliminado = true;
             friends.remove(amigo);
-        }
-        else{
+        } else {
             System.out.println("No se pudo eliminar. No compartes amistad con ese usuario.");
         }
         return amigoEliminado;
+    }
+
+    /*
+     * Extra: password hashing
+     */
+    private void handleSecurePassword(String password) {
+        this.salt = generateSalt();
+        this.password = hashPassword(password, salt);
+    }
+
+    private String generateSalt() {
+        var random = new SecureRandom();
+        var salt = new byte[16];
+        random.nextBytes(salt);
+        return Base64.getEncoder().encodeToString(salt);
+    }
+
+    private String hashPassword(String password, String salt) {
+        try {
+            var digest = MessageDigest.getInstance("SHA-256");
+            digest.update(Base64.getDecoder().decode(salt));
+            var hashedBytes = digest.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error al encriptar la clave", e);
+        }
+    }
+
+    public boolean verificarPassword(String password) {
+        var candidate = hashPassword(password, this.salt);
+        return candidate.equals(this.password);
     }
 }

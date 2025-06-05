@@ -24,7 +24,7 @@ public class GestorClientesTest {
         Cliente c = lista.get(0);
         assertEquals(1, c.getId());
         assertEquals("juan", c.getUser());
-        assertEquals("1234", c.getPassword());
+        assertTrue(c.verificarPassword("1234"));
 
         // Registro otro cliente
         gestor.registrarCliente("maria", "abcd");
