@@ -1,0 +1,39 @@
+﻿\section{Funcionamiento del sistema}\label{sec:funcionamiento-del-sistema}
+En el siguiente apartado vamos a explicar cómo se comportaría nuestro programa en una posible ejecución real.
+Dado que planteamos una ejecución por consola, vamos a basar el siguiente apartado en la funcionalidad prevista en el
+main (\lstinline|Main.java|), la cual se basa en el uso de la clase \lstinline|App| como entidad principal.
+
+El recorrido por las distintas funcionalidades se va a realizar mediante opciones, un comportamiento esperado dado que
+estamos trabajando en consola.
+
+\subsection{Inicio}\label{subsec:inicio}
+Al inicio el programa le brinda al usuario (en esta etapa refiriéndose a usuario/consumidor de la aplicación, no a un
+usuario registrado en el sistema) una serie de opciones, siendo las más importantes:
+\begin{itemize}
+    \item Inicio de sesión.
+    \item Registro de un nuevo usuario.
+\end{itemize}
+Algo \textbf{fundamental} a tener en cuenta con respecto al resto de opciones:
+\begin{itemize}
+    \item Agregar contenido a la plataforma.
+    \item Quitar contenido de la plataforma.
+\end{itemize}
+Es el hecho de que nosotros planteamos que los administradores del sistema sean quienes agreguen los contenidos y que los
+usuarios simplemente hagan uso de ellos, ya sea puntuándolos o agregándolos a su perfil.
+Tal y como funciona una plataforma como Netflix por ejemplo, los administradores agregan las películas y los usuarios las
+consumen.
+La existencia de estas opciones en nuestra ejecución se da básicamente por temas de testing/conveniencia, ya que, como se
+dijo anteriormente, el usuario no debería crear o quitar contenidos, pero nos es imposible simular dicho comportamiento.
+
+\subsection{Usuario iniciado}\label{subsec:usuario-iniciado}
+Cuando el sistema detecta que el usuario ha ingresado, las opciones brindadas pasan a ser otras.
+Puntualmente:
+\begin{itemize}
+    \item Gestionar contenidos: agregar contenidos vistos o a la wishlist, puntuar, etc.
+    \item Gestionar amigos: agregar o quitar amigos.
+\end{itemize}
+Creemos que la lógica en el main está lo suficientemente clara como para abstenernos de hacer una explicación paso por
+paso en este informe.
+Dado que la ejecución sigue fluyendo en distintos prompts de diversas opciones, recomendamos consultar \lstinline|Main.java|
+para una vista clara de todo.
+Concluimos detallando que este flujo de ejecución continua hasta que el usuario cierre sesión/cierre el programa.

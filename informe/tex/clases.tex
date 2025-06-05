@@ -1,0 +1,112 @@
+﻿\section{Entidades}\label{sec:entidades}
+
+\subsection{Contenidos}\label{subsec:contenidos}
+Dado que se va a trabajar con distintos tipos de contenidos, y que muchos de ellos tienen comportamiento y características
+similares, optamos por partir de una clase abstracta \lstinline|Contenido|.
+\begin{lstlisting}[language=Java, caption={Vistazo de la clase abstracta.}]
+public abstract class Contenido {
+    private String nombre;
+    private String tipo;
+    private List<Float> calificaciones = new ArrayList<>();
+    // ...
+}
+\end{lstlisting}
+Para posteriormente, extender la misma para suplir la funcionalidad necesaria, por ejemplo en el caso de las películas:
+\begin{lstlisting}[language=Java, caption={Vistazo de una implementación de la clase abstracta.}]
+public class Pelicula extends Contenido {
+    private float duracion;
+
+    public Pelicula(String nombre, String tipo, String plataforma, LocalDateTime fechaCreacion, float duracion) {
+        super(nombre, tipo, plataforma, fechaCreacion);
+        this.duracion = duracion;
+    }
+    // ...
+}
+\end{lstlisting}
+
+\subsection{Clientes}\label{subsec:clientes}
+Para el caso de los clientes, optamos por encapsular toda la lógica en una única clase, ya que solamente contamos con un
+único tipo.
+\begin{lstlisting}[language=Java, caption={Vistazo de la implementación del cliente.}]
+public class Cliente {
+    private int id;
+    private String user;
+    private String password;
+    private List<Cliente> friends;
+    // ...
+}
+\end{lstlisting}
+
+\subsection{Entidades de sistema}\label{subsec:entidades-de-sistema}\hypertarget{entidades-sistema}
+Dado que en la ejecución real de la aplicación se va a trabajar con un conjunto de clientes/contenidos, optamos por
+definir una serie de clases encargadas de gestionar distintos comportamientos pertinentes a la lógica de ejecución.
+\begin{itemize}
+    \item \lstinline|GestorClientes|: esta clase puntualmente se encarga del manejo de la lista de clientes, tareas como
+    el registro, la dada de baja, así como la búsqueda de un cliente concreto y otras tareas similares.
+    \item \lstinline|PlataformaCentral|: esta clase sería el equivalente de la clase previa, pero referida a los contenidos,
+    se encarga de todas las tareas generales pertinentes a la búsqueda o listado de distintos tipos de contenidos.
+    \item \lstinline|AdministradorDeContenido|: otra clase encargada del manejo de contenidos, esta puntualmente maneja
+    toda tarea referida a la manipulación de los mismos, ya sea en el caso de darles una puntuación como también agregar/quitar nuevos.
+\end{itemize}
+
+\subsection{Entidades de ejecución}\label{subsec:entidades-de-ejecucion}
+Teniendo en cuenta que la simulación de la ejecución de la aplicación la hacemos en consola, creamos una clase que se
+encargue puntualmente de esta tarea, facilitando tareas como el uso de las distintas \hyperlink{entidades-sistema}{entidades de sistema}.
+
+Lo pensamos de manera tal que, en caso de que eventualmente se quiera pasar a una implementación con interfaz gráfica, 
+bastaría con crear otra de estas clases, sin necesidad de afectar a los otros componentes del sistema.
+\begin{lstlisting}[language=Java, caption={Vistazo de la clase principal del sistema.}]
+public final class App {
+    public static String user = "";
+    public static Scanner scanner = new Scanner(System.in);
+    public final static AdministradorDeContenido adminContenido = new AdministradorDeContenido(new PlataformaCentral());
+    public final static GestorClientes gestorClientes = new GestorClientes();
+
+    public static Contenido crearContenido() {}
+    public static Contenido eliminarContenido() {}
+    public static boolean iniciarSesion() {}
+    public static boolean registrarse() {}
+    public static void listarContenidos(char opt) {}
+    public static void agregar(char opt) {}
+    public static void nuevaWishlist() {}
+    public static void calificar() {}
+    public static void listarAmigos() {}
+    public static void agregarAmigo() {}
+    public static void eliminarAmigo() {}
+    
+    private static Cliente currentUser() {
+        return App.gestorClientes.getCliente(user);
+    }
+}
+\end{lstlisting}
+Como se puede ver en el extracto previo, la clase contiene una gran cantidad de métodos referidos a tareas varias, tareas
+realizadas por las \hyperlink{entidades-sistema}{entidades de sistema} planteadas anteriormente.
+Pensamos a esta clase como un intermediario entre ellas, principalmente porque acá manejamos la lógica del ingreso de
+datos por consola.
+Esta idea queda más clara si vemos uno de todos esos métodos.
+\begin{lstlisting}[language=Java, caption={Vistazo de uno de los métodos referidos al ingreso de datos.}]
+public final class App {
+    //...
+    public static void agregarAmigo() {
+        var amigos = currentUser().getFriends();
+        System.out.print("Nombre del amigo a agregar: ");
+        var nombre = scanner.nextLine();
+        var existe = gestorClientes.existe(nombre);
+        if (existe.isEmpty()) {
+            System.out.println("No existe un usuario con ese nombre.");
+        } else if (amigos.stream().anyMatch(c -> c.getUser().equals(nombre))) {
+            System.out.println("Ya tenes a esta persona en tu lista de amigos.");
+        } else {
+        currentUser().agregarAmigo(existe.get());
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Entidades auxiliares}\label{subsec:entidades-auxiliares}
+Estas clases fueron creadas únicamente para facilitar el trabajo, no tienen mapeo alguno con objetos referentes a la
+aplicación. 
+Un ejemplo de una de estas sería una de las clases creadas para agilizar el manejo de datos que vienen del usuario.
+La clase en cuestión se llama \lstinline|ContenidoInput|, se trata de una clase abstracta que generaliza el parseo de
+datos para los distintos tipos de contenido.
+Dado que son clases de poca importancia, nos abstenemos de mostrar extractos en este informe.

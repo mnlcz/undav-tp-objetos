@@ -1,0 +1,15 @@
+title Últimos Vistos
+participant AdministradorDeContenido
+participant PlataformaCentral
+
+AdministradorDeContenido -> AdministradorDeContenido : ultimosVistos = new ArrayList
+AdministradorDeContenido -> PlataformaCentral : ultimosVistos(inicio, fin, plataforma)
+PlataformaCentral -> AdministradorDeContenido: listaContenidos
+
+loop por cada contenido
+    alt fecha dentro del rango, plataforma coincide y fue visto
+        AdministradorDeContenido -> AdministradorDeContenido : agregar a ultimosVistos
+    end
+end
+
+AdministradorDeContenido --> AdministradorDeContenido : lista ultimosVistos

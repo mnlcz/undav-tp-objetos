@@ -1,0 +1,19 @@
+title Opinar y puntuar
+
+participant AdministradorDeContenido
+participant PlataformaCentral
+participant Contenido
+
+
+AdministradorDeContenido-->AdministradorDeContenido:fueVisto(nombre,plataforma)
+alt fueVisto
+AdministradorDeContenido->PlataformaCentral:CalificarContenido(nombre, puntaje, resenia)
+PlataformaCentral-->PlataformaCentral:CalificacionValida(nombre,puntaje, resenia)
+alt CalificacionValida
+PlataformaCentral-->Contenido: Puntaje 
+else calificacionNoValida
+PlataformaCentral--xAdministradorDeContenido:No se puede calificar algo no visto
+end
+else noFueVisto
+AdministradorDeContenido--xAdministradorDeContenido:Error en calificacion
+end

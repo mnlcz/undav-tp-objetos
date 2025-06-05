@@ -1,0 +1,9 @@
+title Registrar Cliente
+participant Gestor de Clientes
+participant Cliente
+
+Gestor de Clientes --> Gestor de Clientes: nuevoId
+Gestor de Clientes -> Cliente: registrarCliente(user, password)
+Cliente --> Gestor de Clientes: nuevoCliente
+Gestor de Clientes->Gestor de Clientes:setId(nuevoId)
+Gestor de Clientes->Gestor de Clientes:añadir a listaClientes

@@ -1,0 +1,21 @@
+title Visto
+
+participant AdministradorDeContenido
+participant PlataformaCentral
+
+AdministradorDeContenido->PlataformaCentral:VerContenido(nombre,fecha,plataforma)
+PlataformaCentral-->Contenido:ExisteContenido(nombre,plataforma)
+alt existeContenido
+Contenido-->PlataformaCentral:Contenido
+PlataformaCentral->PlataformaCentral:MarcarVisto(nombre,fecha,plataforma)
+PlataformaCentral-->AdministradorDeContenido:Contenido
+AdministradorDeContenido-->AdministradorDeContenido:FueVisto(nombre,plataforma)
+alt yaFueVisto
+AdministradorDeContenido--xPlataformaCentral:YaVisto
+else noFueVisto
+AdministradorDeContenido-->PlataformaCentral:MarcarVisto(nombre,fecha,plataforma)
+end
+else noExisteContenido
+Contenido--xPlataformaCentral:Error
+PlataformaCentral--xAdministradorDeContenido:Error
+end

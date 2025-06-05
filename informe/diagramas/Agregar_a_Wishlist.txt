@@ -1,0 +1,23 @@
+title Agregar a wishlist
+
+actor Cliente
+participant Wishlist
+participant PlataformaCentral
+participant Contenido
+
+Cliente -> Wishlist: agregarContenidoWishlist(contenido)
+
+Wishlist-->Wishlist:ExisteWishlist(titulo)
+alt existeWishlist
+Wishlist->Contenido:AgregarContenidoWishlist(titulo,contenido)
+Contenido-->PlataformaCentral:ExisteContenido(nombre,plataforma)
+alt existeContenido
+PlataformaCentral->Wishlist:AgregarContenidoWishlist(titulo,contenido)
+Wishlist-->Cliente:Wishlist
+else noExisteContenido
+Contenido--xCliente:No existe contenido
+end
+
+else noExisteWishlist
+Wishlist--xCliente:No existe wishlist
+end
