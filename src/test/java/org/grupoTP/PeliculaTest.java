@@ -1,12 +1,10 @@
 package org.grupoTP;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 public class PeliculaTest {
