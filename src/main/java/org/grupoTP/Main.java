@@ -1,5 +1,7 @@
 package org.grupoTP;
 
+import mef1.Api;
+
 import java.time.LocalDateTime;
 
 public class Main {
@@ -17,7 +19,7 @@ public class Main {
                         2) Quitar contenido de la plataforma.
                         3) Listar contenido de la plataforma.
                         z) [DEBUG] agregar contenido de prueba.
-                        x) [DEBUG] agregar usuario de prueba.
+                        x) [DEBUG] agregar usuarios de prueba.
                         
                                         USUARIO
                         a) Iniciar sesión.
@@ -35,7 +37,7 @@ public class Main {
                         rellenarPlataformaCentral();
                         break;
                     case "x":
-                        rellenarUsuario();
+                        rellenarUsuarios();
                         break;
                     case "a":
                     case "b":
@@ -92,14 +94,15 @@ public class Main {
     }
 
     private static void userLoop(String option) {
+        var api = new Api(App.gestorClientes.getListaClientes(), App.adminContenido.plataformaCentral.getListaContenidos());
         switch (option) {
-            case "a" -> contenidosLoop();
-            case "b" -> amigosLoop();
+            case "a" -> contenidosLoop(api);
+            case "b" -> amigosLoop(api);
             case "0" -> App.user = "";
         }
     }
 
-    private static void contenidosLoop() {
+    private static void contenidosLoop(Api apiSimulada) {
         while (true) {
             System.out.printf("""
                                     CONTENIDO DE %s
@@ -133,7 +136,11 @@ public class Main {
                     App.calificar();
                     break;
                 case "g":
-                    System.out.println("TODO");
+                    var rec = apiSimulada.recomendarContenido();
+                    System.out.println("MEF1 RECOMIENDA:");
+                    for (var c : rec) {
+                        System.out.println(c);
+                    }
                     break;
                 case "0":
                 default:
@@ -142,7 +149,7 @@ public class Main {
         }
     }
 
-    private static void amigosLoop() {
+    private static void amigosLoop(Api apiSimulada) {
         while (true) {
             System.out.printf("""
                                 AMIGOS DE %s
@@ -151,7 +158,7 @@ public class Main {
                     c) Eliminar amigo.
                     d) Amigos recomendados (MEF1).
                     %n""", App.user);
-            System.out.println("Opción: ");
+            System.out.print("Opción: ");
             switch (App.scanner.nextLine()) {
                 case "a":
                     App.listarAmigos();
@@ -163,7 +170,11 @@ public class Main {
                     App.eliminarAmigo();
                     break;
                 case "d":
-                    System.out.println("TODO");
+                    var amigos = apiSimulada.recomendarUsuarios();
+                    System.out.println("MEF1 RECOMIENDA:");
+                    for (var a : amigos) {
+                        System.out.println(a);
+                    }
                     break;
                 default:
                     return;
@@ -195,8 +206,15 @@ public class Main {
         System.out.println("[DEBUG] AGREGADOS " + App.adminContenido.plataformaCentral.getListaContenidos().size() + " CONTENIDOS.");
     }
 
-    private static void rellenarUsuario() {
+    private static void rellenarUsuarios() {
         App.gestorClientes.registrarCliente("abcd", "abcd");
+        App.gestorClientes.registrarCliente("user1", "pass");
+        App.gestorClientes.registrarCliente("user2", "pass");
+        App.gestorClientes.registrarCliente("user3", "pass");
+        App.gestorClientes.registrarCliente("user4", "pass");
+        App.gestorClientes.registrarCliente("user5", "pass");
+        App.gestorClientes.registrarCliente("user6", "pass");
+        App.gestorClientes.registrarCliente("user7", "pass");
 
         System.out.println("[DEBUG] AGREGADO USUARIO: [abcd:abcd]");
     }
